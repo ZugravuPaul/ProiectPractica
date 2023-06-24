@@ -1,0 +1,20 @@
+# rsync config template
+#
+# Write each rsync option on separate line
+#
+# Config files shared between different profiles should be saved in
+# /home/apashe/microtool/shared
+#
+# Example configuration:
+#
+--verbose
+--archive
+--human-readable
+# exclude all files that match pattern in direct:
+--exclude-from=/home/apashe/microtool/profiles/backup/exclude
+--relative
+--dry-run
+# source
+/home/apashe
+# destination
+/home/apashe/apashe_backup
