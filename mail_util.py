@@ -4,7 +4,12 @@ from email.mime.text import MIMEText
 from dotenv import dotenv_values
 from datetime import date
 
-config = dotenv_values(".env")
+if (args_count := len(sys.argv)) != 4:
+    print(f"Bad usage of script!")
+    raise SystemExit(1)
+
+
+config = dotenv_values("/usr/local/bin/.env")
 
 def send_email(sender_email, recipient_email, subject, message, sender_password):
     try:
@@ -27,7 +32,7 @@ def send_email(sender_email, recipient_email, subject, message, sender_password)
         print("Error sending email:", str(e))
 
 # email details
-sender_email = "zugravupaul14@gmail.com"
+sender_email = "77mail.bot77@gmail.com"
 sender_password = config["pass"]
 recipient_email = sys.argv[3]
 subject = sys.argv[1] 

@@ -43,11 +43,13 @@ printf "\ndeleting any empty directories (other than lost+found)..."
 find $SEARCH_TMP_DIRS -depth -mindepth 1 -type d -a -empty -a ! -name 'lost+found' -print #-delete
 
 logger "cleanup.sh - Done cleaning tmp and log files!"
-# Usage: mail_util.py SUBJECT MESSAGE EMAIL_DEST
-cd /home/apashe/scripts/
-python3 mail_util.py "Cleanup has been performed successfully!" "The cleanup script was executed at $(date)" "$EMAIL_LOGGER"
-
 printf "\nCleanup Script Successfully Executed\n"
+
+# Usage: mail_util.py SUBJECT MESSAGE EMAIL_DEST
+/usr/bin/python3 /usr/local/bin/mail_util.py "Cleanup has been performed successfully!" "The cleanup script was executed at $(date)" "$EMAIL_LOGGER"
+
 fi
+printf "Searching for updates..!\n"
+#apt update && apt upgrade -y
 
 exit 0
