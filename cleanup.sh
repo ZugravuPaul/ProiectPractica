@@ -10,6 +10,9 @@ LINK_AGE=+15
 SOCK_AGE=+15
 #mail to send report
 EMAIL_LOGGER="zugravupaul16@gmail.com"
+#colors for update logs
+GREEN="\033[1;32m"
+NOCOLOR="\033[0m"
 
 EMPTYFILES=true
 
@@ -49,7 +52,36 @@ printf "\nCleanup Script Successfully Executed\n"
 /usr/bin/python3 /usr/local/bin/mail_util.py "Cleanup has been performed successfully!" "The cleanup script was executed at $(date)" "$EMAIL_LOGGER"
 
 fi
+
+mylog() {
+        STEP=$1
+        MSG=$2
+
+        printf "\nstep $STEP: ${GREEN}${MSG}${NOCOLOR}\n"
+        logger "step $STEP: $MSG"
+}
+
 printf "Searching for updates..!\n"
-#apt update && apt upgrade -y
+
+mylog 1 "pre-configuring packages"
+dpkg --configure -a
+
+mylog 2 "fix and attempt to correct a system with broken dependencies"
+apt-get install -f
+
+mylog 3 "update apt cache"
+apt-get update
+
+mylog 4 "upgrade packages"
+apt-get upgrade
+
+mylog 5 "distribution upgrade"
+apt-get dist-upgrade
+
+mylog 6 "remove unused packages"
+apt-get --purge autoremove
+
+mylog 7 "cleaning up.."
+apt-get autoclean
 
 exit 0
