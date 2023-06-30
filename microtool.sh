@@ -16,7 +16,9 @@ Options:
     -c, --create-profile PROFILE_NAME   create new profile (profile data
                             are stored in ${config_dir}/PROFILE_NAME).
                             Profile name can contain alphanumeric
-                            characters only.
+                            characters only. You can start from a shared 
+                            one, if exists.
+    -d, --delete-profile PROFILE_NAME delete a profile and it's data    
     -s, --show-profile-config PROFILE_NAME  show content of profile
                             configuration file (stored in
                             ${config_dir}/PROFILE_NAME)
